@@ -9,7 +9,7 @@ void bridges(int start, int parent, int& timer, vector<int>& list[], vector<int>
 	for(int next: list[start]) {
 		if(next == parent) continue;
 		if(!visited[next]) {
-			bridges(next, timer, list, t, l, visited);
+			bridges(next, start, timer, list, t, l, visited);
 			l[start] = min(l[next], l[start]);
 			if(l[next] > t[start]) {
 				cout << "Bridges: " << start << " -> " << next << endl;
@@ -28,7 +28,7 @@ void articulation(int start, int parent, int& timer, vector<int>& list[], vector
 		if(next == parent) continue;
 		if(!visited[next]) {
 			children++;
-			articulation(next, timer, list, t, l, visited, result);
+			articulation(next, start, timer, list, t, l, visited, result);
 			l[start] = min(l[next], l[start]);
 			if(l[next] >= t[start] && parent != -1) {
 				result[start] = true;
